@@ -1,49 +1,34 @@
 package day_three.java;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Nogg {
 
+    static Map<String, Integer> houses = new LinkedHashMap<>();
+    private static String instructions = data();
+
     public static void main(String[] args) {
 
-        String instructions = data();
+        Santa santa = new Santa(instructions, false);
+        Santa robosanta = new Santa(instructions, true);
 
-        int x = 0;
-        int y = 0;
-        Map houses = new LinkedHashMap();
-
-        for (int i=0; i < instructions.length(); i++) {
-            char c = instructions.charAt(i);
-            switch (c) {
-                case '^':
-                    y++;
-                    break;
-
-                case 'v':
-                    y--;
-                    break;
-                case '>':
-                    x++;
-                    break;
-                case '<':
-                    x--;
-                    break;
-            }
-            String coords = Integer.toString(x) + " " + Integer.toString(y);
-            houses.put(coords, 1);
-        }
-
-
-        System.out.println(houses.toString());
-        System.out.println(houses.size() + 1);
-
+        System.out.println(houses);
+        System.out.println(houses.size());
 
     }
 
 
 
+
+
+
+
     private static String data () {
-        Scanner data = new Scanner(Nogg.class.getClassLoader().getResourceAsStream("day_three/resources/input.txt"));
+
+        Scanner data = new Scanner(Objects.requireNonNull(Nogg.class.getClassLoader().getResourceAsStream("day_three/resources/input.txt")));
 
         return data.next();
 
