@@ -1,27 +1,50 @@
 package day_five.java;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class GoodOrBad {
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
 
-        try (Stream<String> stream = Files.lines(Paths.get("C://Users/jan.samoel/Documents/GitHub/AdventOfCode/src/day_five/java/input.txt"))) {
-        list = stream.collect(Collectors.toList());
-    } catch (IOException e) {
-        e.printStackTrace();
-        System.out.println("what");
-    }
+        two();
 
-        list.forEach(System.out::println);
+
 
     }
 
+    private static void one() {
+        Scanner data = new Scanner(Objects.requireNonNull(GoodOrBad.class.getClassLoader().getResourceAsStream("day_five/resources/input.txt")));
+        int counter = 0;
+        while (data.hasNext()) {
+            String str = data.next();
+            if (str.matches("(.*[aeiou].*){3,}")) {
+                String filtered = str;
+                if (filtered.matches(".*(.)\\1.*")){
+                    String doubleFiltered = filtered;
+                    if (doubleFiltered.matches(".*(ab|cd|pq|xy).*")) {
+                        System.out.println("cancer: " + doubleFiltered);
+                    }
 
+                    else {
+                        counter++;
+                        System.out.println("FOUND: " + doubleFiltered);
+                    }
+
+                }
+            }
+        }
+        System.out.println(counter);
+    }
+
+    static void two() {
+        Scanner data = new Scanner(Objects.requireNonNull(GoodOrBad.class.getClassLoader().getResourceAsStream("day_five/resources/input.txt")));
+        int counter = 0;
+        while (data.hasNext()){
+            String str = data.next();
+            if (str.matches("")){
+                System.out.println(str);
+            }
+        }
+
+    }
 }
