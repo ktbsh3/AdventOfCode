@@ -18,16 +18,14 @@ public class GoodOrBad {
         while (data.hasNext()) {
             String str = data.next();
             if (str.matches("(.*[aeiou].*){3,}")) {
-                String filtered = str;
-                if (filtered.matches(".*(.)\\1.*")){
-                    String doubleFiltered = filtered;
-                    if (doubleFiltered.matches(".*(ab|cd|pq|xy).*")) {
-                        System.out.println("cancer: " + doubleFiltered);
+                if (str.matches(".*(.)\\1.*")){
+                    if (str.matches(".*(ab|cd|pq|xy).*")) {
+                        System.out.println("cancer: " + str);
                     }
 
                     else {
                         counter++;
-                        System.out.println("FOUND: " + doubleFiltered);
+                        System.out.println("FOUND: " + str);
                     }
 
                 }
@@ -41,10 +39,14 @@ public class GoodOrBad {
         int counter = 0;
         while (data.hasNext()){
             String str = data.next();
-            if (str.matches("")){
-                System.out.println(str);
+            if (str.matches(".*(..).*\\1.*")){
+                if (str.matches(".*(.).\\1.*")) {
+                    System.out.println(str);
+                    counter++;
+                }
             }
         }
+        System.out.println(counter);
 
     }
 }
