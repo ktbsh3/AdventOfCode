@@ -1,6 +1,5 @@
 package day_six.java;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
@@ -9,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class MillionLights {
     public static void main(String[] args) {
-        boolean[][] grid = new boolean[1000][1000];
+        int[][] grid = new int[1000][1000];
         Scanner data = new Scanner(Objects.requireNonNull(MillionLights.class.getClassLoader().getResourceAsStream("day_six/resources/input.txt")));
         Pattern p = Pattern.compile("^(.*) ([0-9]+,[0-9]+).* ([0-9]+,[0-9]+)$");
         while (data.hasNextLine()) {
@@ -22,8 +21,6 @@ public class MillionLights {
                 change = m.group(1);
                 startCoords = m.group(2);
                 endCoords = m.group(3);
-                //System.out.println("STATE CHANGE: " + change + " STARTER COORDS: " + startCoords + " END COORDS: " + endCoords);
-
             }
             String[] stcary = startCoords.split(",");
             String[] encary = endCoords.split(",");
@@ -31,21 +28,41 @@ public class MillionLights {
             int sy = Integer.parseInt(stcary[1]);
             int ex = Integer.parseInt(encary[0]);
             int ey = Integer.parseInt(encary[1]);
-            System.out.println("sX: " + sx + "\nsY: " + sy);
-            //System.out.println(Integer.parseInt(stcary[0]));
+            for (int i = sx; i <= ex; i++) {
+                for (int q = sy; q <= ey; q++) {
+                    if (change.contains("turn on")) {
+                        grid[i][q] += 1;
+                    }
+                    if (change.contains("turn off")) {
+                        if (grid[i][q] == 0) {
 
+                        }
+                        else {
+                            grid[i][q] -= 1;
+                        }
+                    }
+                    if (change.contains("toggle")) {
 
+                            grid[i][q] += 2;
 
+                    }
 
-
+                }
+            }
 
         }
-        for (int i = 0; i < 999; i++) {
-            for (int q = 0; q < 999; q++) {
-                System.out.println("nqr" + "i :" + i + " q: " +q);
+
+        int sum = 0;
+        for (int[] i: grid) {
+            for (int q: i) {
+                sum += q;
             }
         }
-        //System.out.println(Arrays.deepToString(grid).replace("], ", "]\n"));
+
+
+        System.out.println(Arrays.deepToString(grid).replace("], ", "]\n"));
+        System.out.println(sum);
+
 
     }
 }
